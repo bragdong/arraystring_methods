@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+  <script type="text/javascript">
+
+//FizzBuzz Exercise
+// for any number evenly divisible by 3, we print out "Fizz" instead
+// for any number evenly divisible by 5, we print out "Buzz" instead
+// for any number evenly divisible by 3 and 5, we print out "FizzBuzz" instead
+function fizzBuzz() {
+  var i = 1;
+  while(i<100)
+  {
+    //
+    var divby3 = i % 3 === 0;
+    var divby5 = i % 5 === 0;
+    var divby3and5 = (divby3 && divby5);
+
+      if (divby3and5)
+      {
+        console.log("fizzbuzz");
+      } else if (divby3)
+      {
+        console.log("fizz");
+      } else if (divby5)
+      {
+        console.log("buzz");
+      } else //not divisible by 3 or 5 so print the number i
+      {
+        console.log(i);
+      }
+      i++;
+  }
+  return;
+}
+fizzBuzz();
+
+
+// ****  replace toUpperCase method ****
+function toUpperCase(str) {
+  var upStr="";
+  // console.log("String passed in = "+str);
+  for (var i = 0; i < str.length; i++)
+  {
+    if ( (str.charCodeAt(i) ) <97) {//already upper case
+      upStr = upStr.concat(str.charAt(i));
+    } else { //lower case so need to convert to upper
+      upStr = upStr.concat(String.fromCharCode(str.charCodeAt(i)-32));
+    }
+  }
+  return upStr;
+}
+console.log("String returned = "+toUpperCase("hello")); //HELLO
+console.log("String returned = "+toUpperCase("HELLO")); //HELLO
+console.log("String returned = "+toUpperCase("HeLlo")); //HELLO
+console.log("String returned = "+toUpperCase("a.b!#c:d\"e")); //A.B!#C:D"E
+
+
+// ****  replace string concat method ****
+  function concat(origStr,concatStr) {
+    var newStr="";
+    if (arguments.length <=1){
+      return "";
+    }
+    else {
+      for (var i=1;i<arguments.length;i++){
+        newStr+=arguments[i];
+      }
+    }
+  return origStr+newStr;
+  }
+console.log(concat());
+console.log(concat("Blue"));
+console.log(concat("Hot","Dog"));
+console.log(concat("1","0","0"));
+console.log(concat("Blue"," ","Sky"," ","Night"));
+
+
+// **** replace endsWith method ****
+function endsWith(origStr,searchStr,len){
+  var tempStr = "";
+  if (arguments.length < 2)  //no search string provided so return false
+    return false;
+  if (arguments.length>2)  //extract string from original based on length parm
+    tempStr=origStr.substring(0,len);
+  else { // no length parm passed in
+    tempStr=origStr;
+  }
+  return(searchStr===tempStr.substring(tempStr.length-searchStr.length));
+}
+console.log(endsWith("Glen","n")); //True
+console.log(endsWith("Glen","")); //True
+console.log(endsWith("Glen")); //False
+console.log(endsWith("Glen"," ")); //False
+console.log(endsWith("The old Dog","Dog",11)); //True
+console.log(endsWith("The old Dog","dog",7)); //False
+console.log(endsWith("The old Dog","old",7)); //True
+
+
+// *** replace index of method ***
+function indexOf(origStr,searchStr,start) {
+      for(i=0; i<origStr.length; i++){
+         if(origStr[i] === searchStr){
+            return i;
+          }
+      }
+      return -1;
+}
+console.log(indexOf("Hello World","l"));
+console.log(indexOf("Bob Bragdon","b"));
+console.log(indexOf("Hello world, welcome to the universe.","t"));
+console.log(indexOf("Hello world, welcome to the universe.","."));
+
+
+// *** replace includes method ***
+function includes(origStr, srchStr, start) {
+  var tempStr="";
+  var results=false;
+  if(arguments.length==1){  // no search string param provided so return false
+    return results;
+  } else if(arguments.length==3){ // if start provided extract string for s
+    tempStr=origStr.substring(start);
+  } else {
+    tempStr=origStr;
+  }
+  for (var i = 0; i < tempStr.length; i++) {
+    var extractStr = tempStr.substr(i, srchStr.length);
+    if (srchStr === extractStr) {
+      results = true;
+      i = tempStr.length;
+    } else if (tempStr.length - i < srchStr.length) {
+      results = false;
+        i = tempStr.length;
+    }
+  }
+return results;
+}
+console.log(includes("Hello world, welcome to the universe.","world",6));//True
+console.log(includes("The Dog is old.","DOG"));//False
+console.log(includes("The Dog is old.","Dog"));//True
+console.log(includes("abcde","cd", 3));//False
+console.log(includes("abcde","cd", 2));//True
+console.log(includes("The Dog is old."));//False
+
+
+// *** replace array push method ***
+function push(x,val) {
+  var len=x.length;
+  for (i=1;i<arguments.length;i++){
+        x[len]=arguments[i];
+        len++;
+  }
+    return len;
+}
+var myarray = ["Apple","Orange","Kiwi"];
+console.log(push(myarray,"Peach")); // 4 ["Apple", "Orange", "Pear", "Peach"]
+var myarray = [];
+console.log(push(myarray,"Peach")); // 1 ["Peach"]
+console.log(push([1,"Hi",5],9)); // 4 [1,"Hi",5,9]
+
+
+// *** replace array join method ***
+function join(a,y) {
+  var sep=',';
+  var newStr="";
+  // var lastElement = a.length-1; // don't want a separator if last element
+  if (arguments.length===2) sep=y;
+  for (i = 0; i < a.length; i++) {
+    if (i===(a.length)-1){ // don't want a separator if last element
+      newStr+=a[i];
+    } else
+    newStr+=a[i]+sep;
+  }
+  return newStr;
+}
+console.log(join(["Banana", "Orange", "Apple", "Mango"])); //Banana,Orange,Apple,Mango
+console.log(join(["5", " ", "Hotdogs", "!"], ""));
+console.log(join(["Banana", "Orange", "Apple", "Mango"]," and "));
+console.log(join(["10", "4", "3"]," - "));
+
+// *** replace array concat method ***
+function concatArray(a1,a2) {
+  var len=a1.length;
+  newArray=a1;
+  for (var i = 0; i < a2.length; i++) {
+    newArray[len+i]=a2[i];
+  }
+  return newArray;
+}
+var array1=["Parent1","Parent2"];
+var array2=["Child1","Child2","Child3"];
+console.log(concatArray(array1,array2)); //(5) ["Parent1", "Parent2", "Child1", "Child2", "Child3"]
+var array1=["Parent1"];
+var array2=["Child1","Child2","Child3"];
+console.log(concatArray(array1,array2)); //(4) ["Parent1", "Child1", "Child2", "Child3"]
+var array1=["Parent1"];
+var array2=[];
+console.log(concatArray(array1,array2)); //["Parent1"]
+
+  </script>
+
+  <title></title>
+</head>
+
+<body>
+</body>
+
+</html>
